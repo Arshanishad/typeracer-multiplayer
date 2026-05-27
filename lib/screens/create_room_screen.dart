@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:typeracer/utils/socket_client.dart';
 import 'package:typeracer/widgets/custom_button.dart';
 import 'package:typeracer/widgets/custom_textfield.dart';
 
@@ -11,11 +12,18 @@ class CreateRoomScreen extends StatefulWidget {
 
 class _CreateRoomScreenState extends State<CreateRoomScreen> {
   final TextEditingController _nameController=TextEditingController();
+  final SocketClient _socketClient=SocketClient.instance;
+
   @override
   void dispose() {
     super.dispose();
     _nameController.dispose();
   }
+
+   testing(){
+    _socketClient.socket!.emit('test','This is Working !');
+   }
+
   @override
   Widget build(BuildContext context) {
     final size=MediaQuery.of(context).size;
