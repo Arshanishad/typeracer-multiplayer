@@ -1,48 +1,57 @@
-//IMPORTS
-//require  is inbuilt funtion to import files 
-//Bring express into my file 
-//express is a framework of nodejs without express nodejs is difficult
-const express = require('express');
-//nodejs already has http module (built-in) we use to create server 
-const http = require('http');
-//connect mongodb,create schemas,store data 
-const mongoose = require('mongoose');
-const { Socket } = require('socket.io');
-//http create server and socket io uses that server for real-time
-const io = require (Socket.io)(server);
-require('dotenv').config();
+// 1. Import required packages
+const express = require('express');       
+const http = require('http');             
+const mongoose = require('mongoose');     
+require('dotenv').config();               
+const { Server } = require('socket.io');  
 
-//Server
-// Create my backend application using Express
+// 2. Create Express app
 const app = express();
-const port=process.env.PORT||3000;
-var server=http.createServer(app);
-var io =require('socket.io')(server);
 
-//middleware
-//Whenever request comes, convert JSON data into JavaScript object
+// 3. Define port
+const port = process.env.PORT || 3000;
+
+// 4. Create HTTP server using Express app
+const server = http.createServer(app);
+
+// 5. Attach Socket.IO to server
+const io = new Server(server);
+
+// 6. Middleware (to read JSON data)
 app.use(express.json());
 
-//connect to mongodb
-//Get MongoDB connection URL from .env file
-//DB =your database link 
-const DB=process.env.MONGO_URI;
-//on() listen for an event 
-io.on('connection',(Socket)=>{
-console.log(Socket.id);
-Socket.on('test',(data)=>{
-console.log(data);
-});
-});
+// 7. Connect to MongoDB
+const DB = process.env.MONGO_URI;
 
-mongoose.connect((DB)).then(()=>{
-    console.log('Connection Successful');
-}).catch((e)=>{
+mongoose.connect(DB)
+  .then(() => {
+    console.log('Database Connected');
+  })
+  .catch((e) => {
     console.log(e);
+  });
+
+// 8. Socket connection
+io.on('connection', (socket) => {
+  console.log('User connected:', socket.id);
+
+  // 9. Listen event from Flutter
+  socket.on('create-game', ({ nickname }) => {
+    console.log('Game created by:', nickname);
+
+    // 10. Send response back
+    socket.emit('game-created', {
+      message: 'Game created successfully'
+    });
+  });
+
+  // 11. Disconnect
+  socket.on('disconnect', () => {
+    console.log('User disconnected:', socket.id);
+  });
 });
 
-//listen to server 
-server.listen(port,"0.0.0.0",()=>{
-    console.log(`server started and running on port ${port}`);
+// 12. Start server
+server.listen(port, "0.0.0.0", () => {
+  console.log(`Server running on port ${port}`);
 });
-
