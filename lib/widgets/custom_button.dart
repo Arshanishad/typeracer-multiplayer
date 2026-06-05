@@ -20,7 +20,6 @@ class CustomButton extends StatelessWidget {
         onPressed: onTap,
         style: ElevatedButton.styleFrom(
           backgroundColor: Colors.blue,
-          // maximumSize: Size(!isHome?width:width/5, 50)
         ),
         child: Text(
           text,
