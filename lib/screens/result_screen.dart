@@ -23,12 +23,9 @@ class ResultScreen extends StatelessWidget {
             Text("🏆 Winner: $winner",
                 style: const TextStyle(fontSize: 22)),
             const SizedBox(height: 20),
-
             Text("Speed: ${wpm.toStringAsFixed(1)} WPM"),
             Text("Accuracy: ${accuracy.toStringAsFixed(1)}%"),
-            
             const SizedBox(height: 30),
-
             ElevatedButton(
               onPressed: () {
                 Navigator.popUntil(context, (route) => route.isFirst);

@@ -13,7 +13,6 @@ class CreateRoomScreen extends StatefulWidget {
 class _CreateRoomScreenState extends State<CreateRoomScreen> {
   final TextEditingController _nameController = TextEditingController();
   final SocketMethods _socketMethods = SocketMethods();
-
   bool isLoading = false;
 
   @override
@@ -24,15 +23,11 @@ class _CreateRoomScreenState extends State<CreateRoomScreen> {
 
   void createRoom() async {
     if (_nameController.text.trim().isEmpty) {
-      ScaffoldMessenger.of(context)
-          .showSnackBar(const SnackBar(content: Text('Enter nickname')));
+      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Enter nickname')));
       return;
     }
-
     setState(() => isLoading = true);
-
-    await _socketMethods.createGame(_nameController.text.trim());
-
+    _socketMethods.createGame(_nameController.text.trim());
     setState(() => isLoading = false);
   }
 
