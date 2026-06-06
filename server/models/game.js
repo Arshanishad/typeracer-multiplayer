@@ -1,24 +1,25 @@
 const mongoose = require('mongoose');
-const playerSchema = require('./Player');
-const gameschema = new mongoose.schema({
+
+const gameSchema = new mongoose.Schema({
     words: [
         {
-            type: String,
-
+            type: String
         }
     ],
-    players: [playerSchema],
+    players: [],
     isJoin: {
         type: Boolean,
-        default: true,
+        default: true
     },
     isOver: {
         type: Boolean,
-        default: false,
+        default: false
     },
-    startTime:{
-        type:Number,
+    startTime: {
+        type: Number
     }
 });
-const gameModel =mongoose.model('Game',gameschema);
-module.exports=gameModel;
+
+const Game = mongoose.model('Game', gameSchema);
+
+module.exports = Game;

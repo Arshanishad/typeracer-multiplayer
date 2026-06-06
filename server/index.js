@@ -1,4 +1,4 @@
-//1. Import required packages
+// 1. Import packages
 const express = require('express');
 const http = require('http');
 const mongoose = require('mongoose');
@@ -6,54 +6,69 @@ require('dotenv').config();
 const { Server } = require('socket.io');
 const Game = require('./models/Game');
 
-//2. Create express app
+// 2. Create app
 const app = express();
 
-//3. Port
+// 3. Port
 const port = process.env.PORT || 3000;
 
-//4. Create HTTP server
+// 4. Create server
 const server = http.createServer(app);
 
-//5. Attach Socket.IO
+// 5. Socket setup
 const io = new Server(server);
 
-//6. Middleware
+// 6. Middleware
 app.use(express.json());
 
-//7. MongoDB connection
+// 7. Connect MongoDB
 const DB = process.env.MONGO_URI;
+
 mongoose.connect(DB)
-    .then(() => console.log('Database Connected'))
-    .catch((e) => console.log(e));
+  .then(() => {
+    console.log('✅ Database Connected');
+  })
+  .catch((e) => {
+    console.log(e);
+  });
 
-//8. Socket connection
+// 8. Socket connection
 io.on('connection', (socket) => {
-    console.log('User Connected:', socket.id);
+  console.log('🔌 User connected:', socket.id);
 
-    //9. Listen event from Flutter
-    socket.on('create-game', async ({ nickname }) => {
-        try {
-            let game = new Game({
-                nickname
-            });
-            await game.save();
-            //10. Send response
-            socket.emit('game-created', {
-                message: 'Game Created Successfully'
-            });
-        } catch (e) {
-            console.log(e);
-        }
-    });
+  // 9. Create Game Event
+  socket.on('create-game', async ({ nickname }) => {
+    try {
+      // Create new game
+      let game = new Game({
+        nickname
+      });
 
-    // 11. Disconnect
-    socket.on('disconnect', () => {
-        console.log('User disconnected:', socket.id);
-    });
+      // Save to DB
+      await game.save();
+
+      console.log('🎮 Game saved:', game);
+
+      // Send response
+      socket.emit('game-created', {
+        message: 'Game created successfully'
+      });
+
+    } catch (e) {
+      console.log(e);
+    }
+  });
+
+  // 10. Disconnect
+  socket.on('disconnect', () => {
+    console.log('❌ User disconnected:', socket.id);
+  });
 });
 
-// 12. Start server
-server.listen(port, "0.0.0.0", () => {
+ // 11. Start server
+// server.listen(port, "0.0.0.0", () => {
+//   console.log(`🚀 Server running on port ${port}`);
+// });
+server.listen(port, () => {
     console.log(`Server running on port ${port}`);
 });
