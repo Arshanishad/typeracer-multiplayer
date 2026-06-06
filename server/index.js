@@ -26,7 +26,7 @@ const DB = process.env.MONGO_URI;
 
 mongoose.connect(DB)
   .then(() => {
-    console.log('✅ Database Connected');
+    console.log('Database Connected');
   })
   .catch((e) => {
     console.log(e);
@@ -47,7 +47,7 @@ io.on('connection', (socket) => {
       // Save to DB
       await game.save();
 
-      console.log('🎮 Game saved:', game);
+      console.log('Game saved:', game);
 
       // Send response
       socket.emit('game-created', {
@@ -61,13 +61,13 @@ io.on('connection', (socket) => {
 
   // 10. Disconnect
   socket.on('disconnect', () => {
-    console.log('❌ User disconnected:', socket.id);
+    console.log('User disconnected:', socket.id);
   });
 });
 
  // 11. Start server
 // server.listen(port, "0.0.0.0", () => {
-//   console.log(`🚀 Server running on port ${port}`);
+//   console.log(`Server running on port ${port}`);
 // });
 server.listen(port, () => {
     console.log(`Server running on port ${port}`);
