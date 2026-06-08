@@ -3,6 +3,10 @@ const express = require('express');
 const http = require('http');
 const mongoose = require('mongoose');
 require('dotenv').config();
+
+//From socket.io package ,take only the Server class 
+//socket.io package=toolbox
+//Server = one tool inside toolbox
 const { Server } = require('socket.io');
 const Game = require('./models/Game');
 
@@ -34,7 +38,7 @@ mongoose.connect(DB)
 
 // 8. Socket connection
 io.on('connection', (socket) => {
-  console.log('🔌 User connected:', socket.id);
+  console.log(' User connected:', socket.id);
 
   // 9. Create Game Event
   socket.on('create-game', async ({ nickname }) => {
