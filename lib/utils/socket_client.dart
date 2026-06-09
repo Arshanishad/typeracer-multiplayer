@@ -7,7 +7,6 @@ class SocketClient {
   // This holds the live connection
   // This is the “wire” between Flutter and server
   IO.Socket? socket;
-
   // This stores SINGLE object of this class
   // (used for singleton pattern - only one connection in whole app)
   // Ensures ONLY ONE socket connection exists
