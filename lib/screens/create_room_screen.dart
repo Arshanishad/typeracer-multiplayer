@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:typeracer/utils/socket_methods.dart';
-import 'package:typeracer/widgets/custom_button.dart';
-import 'package:typeracer/widgets/custom_textfield.dart';
+import 'package:flutter_typing_race_multiplayer/utils/socket_methods.dart';
+import 'package:flutter_typing_race_multiplayer/widgets/custom_button.dart';
+import 'package:flutter_typing_race_multiplayer/widgets/custom_textfield.dart';
+
 
 class CreateRoomScreen extends StatefulWidget {
   const CreateRoomScreen({super.key});

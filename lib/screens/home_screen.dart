@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:typeracer/widgets/custom_button.dart';
+import 'package:flutter_typing_race_multiplayer/widgets/custom_button.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});

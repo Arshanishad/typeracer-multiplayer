@@ -1,4 +1,4 @@
-import 'package:typeracer/utils/socket_client.dart';
+import 'package:flutter_typing_race_multiplayer/utils/socket_client.dart';
 
 class SocketMethods{
 final _socketClient=SocketClient.instance.socket;

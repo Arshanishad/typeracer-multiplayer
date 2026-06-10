@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:typeracer/screens/create_room_screen.dart';
-import 'package:typeracer/screens/home_screen.dart';
-import 'package:typeracer/screens/join_room_screen.dart';
+import 'package:flutter_typing_race_multiplayer/screens/create_room_screen.dart';
+import 'package:flutter_typing_race_multiplayer/screens/home_screen.dart';
+import 'package:flutter_typing_race_multiplayer/screens/join_room_screen.dart';
 
 void main() {
   runApp(const MyApp());
