@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_typing_race_multiplayer/utils/socket_client.dart';
 import 'package:flutter_typing_race_multiplayer/utils/socket_methods.dart';
 import 'package:flutter_typing_race_multiplayer/widgets/custom_button.dart';
 import 'package:flutter_typing_race_multiplayer/widgets/custom_textfield.dart';
@@ -14,9 +15,10 @@ class CreateRoomScreen extends StatefulWidget {
 class _CreateRoomScreenState extends State<CreateRoomScreen> {
   final TextEditingController _nameController=TextEditingController();
   final SocketMethods _socketMethods = SocketMethods();
+  final SocketClient _socketClient =SocketClient.instance;
 
   testing(){
-    
+    _socketClient.socket!.emit('test','This is Working');
   }
 
   @override
@@ -44,7 +46,8 @@ class _CreateRoomScreenState extends State<CreateRoomScreen> {
               SizedBox(height: size.height*0.08,),
               CustomTextfield(controller:_nameController , hintText: 'Enter your nickname'),
               const SizedBox(height: 30,),
-              CustomButton(text: 'Create', onTap: ()=>_socketMethods.createGame(_nameController.text),)
+              CustomButton(text: 'Create', onTap: testing,
+              )
             ],
           ),
         ),
