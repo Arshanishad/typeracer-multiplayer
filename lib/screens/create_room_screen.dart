@@ -16,9 +16,9 @@ class _CreateRoomScreenState extends State<CreateRoomScreen> {
   final SocketMethods _socketMethods = SocketMethods();
   // final SocketClient _socketClient =SocketClient.instance;
 
-  // testing(){
-  //   _socketClient.socket!.emit('test','This is Working');
-  // }
+    // testing(){
+    //   _socketClient.socket!.emit('test','This is Working');
+   // }
 
   @override
   void dispose() {
